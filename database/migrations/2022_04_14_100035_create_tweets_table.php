@@ -18,7 +18,7 @@ class CreateTweetsTable extends Migration
             $table->text("tweet_description") -> nullable();
             $table->string("tweet_img") -> nullable();
             $table->integer("tweet_likes") ->unsigned();
-            $table->date("tweet_date");
+            $table->dateTime("tweet_date");
             $table->timestamps();
         });
     }

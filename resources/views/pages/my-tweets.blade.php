@@ -22,7 +22,7 @@
 
 
         <div class="form-group">
-            <label>Add Tweet Text:</label>
+            <label>Add Tweet Text: {{$current->format('Y-m-d  H:i')}}</label>
             <textarea class="form-control" name="tweet_description"></textarea>
         </div>
         <div class="form-group">
@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
             <label>Publication Date:</label>
-            <input type="date" name="tweet_date" multiple class="form-control" value="{{$current->format('Y-m-d')}}" min="{{$current->format('Y-m-d')}}">
+            <input type="datetime-local" name="tweet_date" multiple class="form-control" value="{{$current->format('Y-m-d')}}T{{$current->format('H:i')}}" min="{{$current->format('Y-m-d')}}T{{$current->format('H:i')}}">
         </div>
         <div class="form-group">
             <button class="btn btn-success">Add New Tweet</button>

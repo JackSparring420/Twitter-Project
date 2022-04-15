@@ -16,7 +16,7 @@ class TwitterController extends Controller
 
     public function profile(){
         $tweets = Tweet::all()->sortByDesc('tweet_date');
-        $current = Carbon::now();
+        $current = Carbon::now('Europe/Stockholm');
         
         return view('pages.my-tweets', compact('tweets', 'current'));
     }
@@ -44,7 +44,15 @@ class TwitterController extends Controller
 
         $tweet = Tweet::create($data);
 
-        return redirect() -> route('home');
+        return redirect() -> route('profile');
+    }
+
+    public function delete($id) {
+
+        $tweet = Tweet::findOrFail($id);
+
+        $tweet -> delete();
+        return json_encode($tweet);
     }
 
     // protected function schedule(Schedule $schedule)

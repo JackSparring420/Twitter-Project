@@ -30,7 +30,7 @@ Route::get('/', 'TwitterController@home')->name('home');
 // profile
 Route::get('/profile', 'TwitterController@profile')->name('profile');
 
-// download the posts
+// get tweets on my DB
 Route::get('/MyTweets', 'TwitterController@MyTweets');
 // new tweet
 Route::post('/create', 'TwitterController@create')->name('create');

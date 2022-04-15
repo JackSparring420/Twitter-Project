@@ -18,7 +18,7 @@
             </div>
         </form> -->
         <div v-for="tweet in tweets" :key="tweet.id" class="post" >
-            <div :class="new Date(tweet.tweet_date).getTime() >  date ? 'opacity' : ''">
+            <div :class="new Date(tweet.tweet_date).getTime() > date ? 'opacity' : ''">
                 <div class="post__header">
                     <div class="post-meta">                    
                         <div class="post-meta__icon">
@@ -26,7 +26,7 @@
                         </div>
                         <div class="post-meta__data">
                             <div class="post-meta__author">Emanuele Arconte</div>
-                            <div class="post-meta__time">{{tweet.tweet_date}}</div>
+                            <div class="post-meta__time">{{format(tweet.tweet_date)}}</div>
                         </div>                    
                     </div>
                 </div>
@@ -57,6 +57,7 @@
 
 <script>
 import { autoLink } from 'vue-highlights';
+import { format } from 'date-fns';
 
 export default {
 data: function(){
@@ -68,6 +69,7 @@ data: function(){
     }
 },
 mounted(){
+    // get tweets on my DB
     axios.get('/MyTweets')
         .then(r => {
             this.tweets = r.data;
@@ -78,6 +80,9 @@ mounted(){
 methods:{
     autoLinked(text){
         return autoLink(text) 
+    },
+    format(date){
+    return format(new Date(date), "dd/MM/yyyy  HH:mm")
     }
 }
 }
