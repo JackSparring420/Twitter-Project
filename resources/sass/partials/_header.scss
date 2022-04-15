@@ -1,0 +1,190 @@
+// HEADER
+.header-nav{
+    top: 0;
+    background-color: hsl(var(--clr-primary)/.95);
+    text-align: center;
+    position: relative;
+    top: 0;
+    z-index: 999;
+    width: 100%;
+    padding: 1.5rem;
+    height: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    img {
+        width: 75px;
+        height: 75px;
+    }
+    h1{
+        text-align: right;
+        color: hsl(var(--clr-neutral-100));
+    }
+    
+}
+.nav-nav{
+    position: absolute;
+    text-align: left;
+    right: 0;
+    background-color: hsl(var(--clr-primary));
+    width: 100%;
+    transform: scale(1,0);
+    transform-origin: top;
+    top: 100px;
+    ul{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        li{
+            margin-bottom: 1em;
+            margin-left: 1em;
+            span, 
+            a {
+                color: hsl(var(--clr-neutral-100));
+                text-decoration: none;
+                font-size: 1.1rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                transition: opacity 150ms ease-in-out;
+                cursor: pointer;
+                &:hover {
+                    color: hsl(var(--clr-accent));
+                }
+            }
+        }
+    }
+}
+.nav-toggle{
+    display: none;
+}
+.nav-toggle-label{
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after{
+    display: block;
+    background-color: hsl(var(--clr-neutral-100));
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+    position: relative;
+}
+.nav-toggle-label span::before,
+.nav-toggle-label span::after{
+    content: '';
+    position: absolute;
+}
+.nav-toggle-label span::before{
+    bottom: 7px;
+}
+.nav-toggle-label span::after{
+    top: 7px;
+}
+
+.nav-toggle ~ nav {
+    transition: transform 400ms ease-in-out;
+}
+
+.nav-toggle:checked ~ nav{
+    transform: scale(1,1);
+    transition: transform 400ms ease-in-out;
+}
+.nav-toggle:checked ~ nav span{
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+}
+
+// HEADER JUMBOTRON
+#home-jumbo {
+    height: 60ch;
+    width: 100%;
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .nav-toggle-label{
+        display: none;
+    }
+    div{
+        &.header-nav{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1 {
+                text-align: left;
+            }
+            li{
+                margin-bottom: 0;
+                span,
+                a {
+                    opacity: 1;
+                    position: relative;
+                }
+            }
+        }  
+    }
+  .nav-nav{
+    all: unset;
+    grid-column: 3 / 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    li{
+        margin-left: 3em;
+
+    }
+  }
+  .nav-nav{
+      .ul-links{
+          display: flex;
+          justify-content: flex-end;
+    }
+    
+  }
+    .nav-nav{
+        a::before,
+        span::before {
+            content: '';
+            display: block;
+            height: 5px;
+            background-color: hsl(var(--clr-accent));
+            position: absolute;
+            top: -.75em;
+            left: 0;
+            right: 0;
+            transform: scale(0,1);
+            transition: transform ease-in-out 250ms;
+        }
+        a:hover::before,
+        span:hover::before{
+            transform: scale(1,1);
+        } 
+    }
+}
+
+@media screen and(min-width: 768px) and( max-width: 840px){
+    .nav-nav{
+        ul{
+            li{
+                span, 
+                a {
+                    font-size: 0.9rem;
+                }
+            }
+        }
+    }
+    
+}
