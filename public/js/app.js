@@ -2281,9 +2281,6 @@ __webpack_require__.r(__webpack_exports__);
       console.log(r.data);
     });
     this.date = new Date().getTime();
-    axios.get('/twitter').then(function (r) {
-      console.log('log di r: ' + r);
-    });
   },
   methods: {
     // get new tweet

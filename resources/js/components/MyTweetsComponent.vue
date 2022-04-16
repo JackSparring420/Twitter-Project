@@ -93,10 +93,6 @@ mounted(){
             });
     this.date = new Date().getTime();
 
-    axios.get('/twitter')
-        .then(r => {
-            console.log('log di r: '+r);
-        });
 },
 methods:{
     // get new tweet
