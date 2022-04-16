@@ -36,3 +36,4 @@ import VueHighlights, { autoLink, autoHighlight } from 'vue-highlights'
 
 // Install component
 Vue.component(VueHighlights.name, VueHighlights)
+

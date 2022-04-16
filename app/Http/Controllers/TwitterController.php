@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Tweet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Atymic\Twitter\Facade\Twitter;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Console\Scheduling\Schedule;
+use Atymic\Twitter\Twitter as TwitterContract;
 
 class TwitterController extends Controller
 {
@@ -47,6 +49,22 @@ class TwitterController extends Controller
         return redirect() -> route('profile');
     }
 
+    public function createVue(Request $request) {
+
+        $data = $request -> validate([
+            'tweet_description' => 'required|string|max:255',
+            'tweet_img' => 'string|max:255',
+            'tweet_date' => 'required|date',
+        ]);
+        // default number of likes
+        $data['tweet_likes'] = 0;
+
+        $tweet = Tweet::create($data);
+
+        return response()->json($tweet);
+    }
+
+
     public function delete($id) {
 
         $tweet = Tweet::findOrFail($id);
@@ -55,10 +73,4 @@ class TwitterController extends Controller
         return json_encode($tweet);
     }
 
-    // protected function schedule(Schedule $schedule)
-    // {
-    //     $schedule->call(function () {
-    //         Tweet::all();
-    //     })->daily();
-    // }
 }

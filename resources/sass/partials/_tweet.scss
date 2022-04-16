@@ -27,6 +27,7 @@ h1 {
 }
 
 .post { 
+    position: relative;
     margin: 20px auto;
     width: 40%;
     padding: 16px;
@@ -40,6 +41,13 @@ h1 {
     @media screen and (min-width:821px) and (max-width:1100px){
         width: 50%;
     }
+}
+
+.delete_tweet {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
 }
 
 .post__header {

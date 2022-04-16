@@ -29,6 +29,13 @@
     background-color: hsl(var(--clr-accent));
 }
 
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+    border: 1px solid hsl(var(--clr-primary)) !important;
+    box-shadow: 0 0 10px hsl(var(--clr-primary)) !important;
+}
 
 
 
@@ -37,6 +44,15 @@ body{
 }
 
 .form-tweet{
-    width: 50%;
+    width: 40%;
     margin: auto;
+    @media screen and (max-width:576px){
+        width: 90%;
+    }
+    @media screen and (min-width:576px) and (max-width:821px){
+        width: 70%;
+    }
+    @media screen and (min-width:821px) and (max-width:1100px){
+        width: 50%;
+    }
 }

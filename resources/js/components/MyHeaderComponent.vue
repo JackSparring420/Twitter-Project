@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="header-nav">
-            <img src="https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_960_720.jpg" alt="">
+            <i class="fab fa-twitter"></i>
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <nav class="nav-nav">
                 <ul class="ul-links">

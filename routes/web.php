@@ -34,3 +34,7 @@ Route::get('/profile', 'TwitterController@profile')->name('profile');
 Route::get('/MyTweets', 'TwitterController@MyTweets');
 // new tweet
 Route::post('/create', 'TwitterController@create')->name('create');
+Route::post('/createVue', 'TwitterController@createVue');
+// delete tweet
+Route::post('/delete/{id}', 'TwitterController@delete');
+

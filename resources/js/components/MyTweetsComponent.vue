@@ -1,22 +1,11 @@
 <template>
     <section>
-        <!-- <form action="">
-            <div class="form-group">
-                <label>Add Tweet Text:</label>
-                <textarea class="form-control" name="tweet_description"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Add Multiple Images:</label>
-                <input type="file" name="tweet_img" multiple class="form-control">
-            </div>
-            <div class="form-group">
-                <label>Publication Date:</label>
-                <input type="date" name="tweet_date" multiple class="form-control" value="{{$current->format('Y-m-d')}}" min="{{$current->format('Y-m-d')}}">
-            </div>
-            <div class="form-group">
-                <button class="btn btn-success">Add New Tweet</button>
-            </div>
-        </form> -->
+
+        <FormTweetComponent 
+            :tweets="tweets"
+            @getNewTweet="getNewTweet"
+        />
+
         <div v-for="tweet in tweets" :key="tweet.id" class="post" >
             <div :class="new Date(tweet.tweet_date).getTime() > date ? 'opacity' : ''">
                 <div class="post__header">
@@ -48,18 +37,45 @@
                     </div> 
                 </div>            
             </div>
-         <div class="my-linked-text">
-        </div>
+            <button type="button" class="btn btn-primary delete_tweet" data-toggle="modal" data-target="#exampleModal" v-if="new Date(tweet.tweet_date).getTime() > date">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">ELIMINA</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Vuoi eliminare il post?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteTweet(tweet.id)">SI</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
         
         </div>
+
     </section>
 </template>
 
 <script>
 import { autoLink } from 'vue-highlights';
 import { format } from 'date-fns';
+import FormTweetComponent from './FormTweetComponent.vue';
 
 export default {
+components: { 
+        FormTweetComponent,
+    },
 data: function(){
     return{
         tweets: [],
@@ -75,14 +91,46 @@ mounted(){
             this.tweets = r.data;
             console.log(r.data);
             });
-    this.date = new Date().getTime() ;
+    this.date = new Date().getTime();
+
+    axios.get('/twitter')
+        .then(r => {
+            console.log('log di r: '+r);
+        });
 },
 methods:{
+    // get new tweet
+    getNewTweet(getNewTweet){
+        this.tweets = getNewTweet;
+        console.log('ciaooo');
+    },
+    // highlight text
     autoLinked(text){
         return autoLink(text) 
     },
+    // format date
     format(date){
     return format(new Date(date), "dd/MM/yyyy  HH:mm")
+    },
+    // delete dish
+    deleteTweet(id) {
+            axios.post(`/delete/${id}`)
+            .then(res => { 
+                const tweet = res.data;
+                let tweetInd = this.getTweetById(tweet.id);
+                this.tweets.splice(tweetInd, 1); 
+            })
+
+    },
+    // get tweet index to delete
+    getTweetById(id){
+        for (let i = 0; i < this.tweets.length; i++) {
+            const tweet = this.tweets[i];
+            if (tweet.id == id) {
+                return i;
+            }
+        }
+        return -1
     }
 }
 }

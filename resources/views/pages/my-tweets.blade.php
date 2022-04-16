@@ -2,7 +2,7 @@
 @section('content')
     {{-- form create new tweet --}}
 
-    <form method="POST" action="{{ route('create') }}" enctype="multipart/form-data" class="form-tweet">
+    {{-- <form method="POST" action="{{ route('create') }}" enctype="multipart/form-data" class="form-tweet">
 
 
         {{ csrf_field() }}
@@ -22,21 +22,24 @@
 
 
         <div class="form-group">
-            <label>Add Tweet Text: {{$current->format('Y-m-d  H:i')}}</label>
+            <label>Add Tweet Text:</label>
             <textarea class="form-control" name="tweet_description"></textarea>
         </div>
-        <div class="form-group">
-            <label>Add Multiple Images:</label>
-            <input type="file" name="tweet_img" multiple class="form-control">
+        <div class="container row justify-content-between">
+            <div class="form-group">
+                <label>Add Multiple Images:</label>
+                <input type="file" name="tweet_img" multiple class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Publication Date:</label>
+                <input type="datetime-local" name="tweet_date" multiple class="form-control" value="{{$current->format('Y-m-d')}}T{{$current->format('H:i')}}" min="{{$current->format('Y-m-d')}}T{{$current->format('H:i')}}">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Publication Date:</label>
-            <input type="datetime-local" name="tweet_date" multiple class="form-control" value="{{$current->format('Y-m-d')}}T{{$current->format('H:i')}}" min="{{$current->format('Y-m-d')}}T{{$current->format('H:i')}}">
-        </div>
+
         <div class="form-group">
             <button class="btn btn-success">Add New Tweet</button>
         </div>
-    </form>
+    </form> --}}
 
 
     {{-- my tweets --}}
