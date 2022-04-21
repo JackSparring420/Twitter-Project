@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="post__text" v-html="autoLinked(tweet.tweet_description)"></div>
-                <div class="post__image">
+                <div class="post__image" v-if="tweet.tweet_img != null">
                     <img :src="'/storage/tweet/' + tweet.tweet_img" alt="">
                 </div>
                 <div class="post__footer">
@@ -80,7 +80,6 @@ data: function(){
     return{
         tweets: [],
         date: '',
-        text: '#funzioni?',
                 
     }
 },

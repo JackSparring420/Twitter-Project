@@ -2085,42 +2085,6 @@ var dateTime = date + 'T' + time;
   // this.date = new Date();
   this.hour = new Date();
 }), _defineProperty(_components$data$comp, "methods", {
-  // stamp date for value
-  now: function now() {
-    var today = new Date();
-    var currentMonth = today.getMonth() + 1;
-    var currentDay = today.getDate();
-    var currentHours = today.getHours();
-    var currentMinutes = today.getMinutes();
-
-    if (currentMonth < 10) {
-      currentMonth = '0' + currentMonth;
-    }
-
-    ;
-
-    if (currentDay < 10) {
-      currentDay = '0' + currentDay;
-    }
-
-    ;
-
-    if (currentHours < 10) {
-      currentHours = '0' + currentHours;
-    }
-
-    ;
-
-    if (currentMinutes < 10) {
-      currentMinutes = '0' + currentMinutes;
-    }
-
-    ;
-    var date = today.getFullYear() + '-' + currentMonth + '-' + currentDay;
-    var time = currentHours + ":" + currentMinutes;
-    var dateTime = date + 'T' + time;
-    return dateTime;
-  },
   // save form image
   saveImg: function saveImg(img) {
     this.tweet_img = img.target.files[0];
@@ -2195,7 +2159,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // redirect to user profile
     userProfile: function userProfile() {
-      window.location.href = '/profile';
+      window.location.href = '/';
     }
   }
 });
@@ -2294,8 +2258,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       tweets: [],
-      date: '',
-      text: '#funzioni?'
+      date: ''
     };
   },
   mounted: function mounted() {
@@ -60270,9 +60233,6 @@ var render = function () {
                         },
                         domProps: { value: _vm.date },
                         on: {
-                          click: function ($event) {
-                            return _vm.now()
-                          },
                           input: function ($event) {
                             if ($event.target.composing) {
                               return
@@ -60491,11 +60451,16 @@ var render = function () {
                 },
               }),
               _vm._v(" "),
-              _c("div", { staticClass: "post__image" }, [
-                _c("img", {
-                  attrs: { src: "/storage/tweet/" + tweet.tweet_img, alt: "" },
-                }),
-              ]),
+              tweet.tweet_img != null
+                ? _c("div", { staticClass: "post__image" }, [
+                    _c("img", {
+                      attrs: {
+                        src: "/storage/tweet/" + tweet.tweet_img,
+                        alt: "",
+                      },
+                    }),
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "post__footer" }, [
                 _c("div", { staticClass: "likes js-likes" }, [

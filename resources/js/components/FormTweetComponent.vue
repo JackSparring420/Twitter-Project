@@ -30,7 +30,7 @@
                     </div>
                     <div class="modal-body">
                         <label>Publication Date:</label>
-                        <input type="datetime-local" name="tweet_date" multiple class="form-control" @click="now()" v-model="date" :min="date">
+                        <input type="datetime-local" name="tweet_date" multiple class="form-control" v-model="date" :min="date">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-target="#scheduling" data-dismiss="modal">OK</button>
@@ -89,22 +89,6 @@ mounted(){
     this.hour = new Date();
 },
 methods: {
-    // stamp date for value
-    now(){
-        let today = new Date();
-        let currentMonth = (today.getMonth()+1);
-        let currentDay = today.getDate();
-        let currentHours = today.getHours();
-        let currentMinutes = today.getMinutes();
-        if (currentMonth < 10) { currentMonth = '0' + currentMonth;};
-        if (currentDay < 10) { currentDay = '0' + currentDay;};
-        if (currentHours < 10) { currentHours = '0' + currentHours;};
-        if (currentMinutes < 10) { currentMinutes = '0' + currentMinutes;};
-        let date = today.getFullYear()+'-'+currentMonth+'-'+currentDay;
-        let time = currentHours + ":" + currentMinutes;
-        let dateTime = date+'T'+time;
-        return dateTime
-    },
     // save form image
     saveImg(img) {
         this.tweet_img = img.target.files[0];

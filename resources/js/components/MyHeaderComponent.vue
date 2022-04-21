@@ -27,7 +27,7 @@ export default {
     methods: {
         // redirect to user profile
         userProfile(){
-            window.location.href = '/profile';
+            window.location.href = '/';
         },
     }
 }

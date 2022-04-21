@@ -21,16 +21,16 @@ use Coderjerk\BirdElephant\BirdElephant;
 // });
 
 
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
 
 // homepage
-Route::get('/', 'TwitterController@home')->name('home');
+// Route::get('/', 'TwitterController@home')->name('home');
 
 // profile
-Route::get('/profile', 'TwitterController@profile')->name('profile');
+Route::get('/', 'TwitterController@profile')->name('profile');
 
 // get tweets on my DB
 Route::get('/MyTweets', 'TwitterController@MyTweets');
