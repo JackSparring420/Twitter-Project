@@ -106,24 +106,29 @@ class TwitterController extends Controller
             if($tweet ->tweet_date <= Carbon::now('Europe/Stockholm')){
             
                 $twitter = new BirdElephant($credentials);
-                $data['tweet_update'] = 1;
+                $data['tweet_update'] = 0;
 
 
                 //only works with API v1
-                // first, use the tweeets()->upload method to upload your image file
-                $image = $twitter->tweets()->upload('/storage/tweet/' + $tweet ->tweet_image);
-                // //pass the returned media id to a media object as an array
-                $media = (new \Coderjerk\BirdElephant\Compose\Media)->mediaIds(
-                    [
-                        $image->media_id_string
-                    ]
-                );
+                if( $tweet -> tweet_img !== NULL ){
+                    // first, use the tweeets()->upload method to upload your image file
+                    $image = $twitter->tweets()->upload("./storage/tweet/{$tweet -> tweet_img}");
+                    // //pass the returned media id to a media object as an array
+                    $media = (new \Coderjerk\BirdElephant\Compose\Media)->mediaIds(
+                        [
+                            $image->media_id_string
+                        ]
+                    );
+    
+                    $tweetPost = Tweet::findOrFail($tweet -> id);
+                    $tweetPost -> update($data);
+                    $tweet = (new \Coderjerk\BirdElephant\Compose\Tweet)->text($tweet -> tweet_description)->media($media);
+                }else{
+                    $tweetPost = Tweet::findOrFail($tweet -> id);
+                    $tweetPost -> update($data);
+                    $tweet = (new \Coderjerk\BirdElephant\Compose\Tweet)->text($tweet -> tweet_description);
+                }  
 
-
-                $tweetPost = Tweet::findOrFail($tweet -> id);
-                $tweetPost -> update($data);
-            
-                $tweet = (new \Coderjerk\BirdElephant\Compose\Tweet)->text($tweet -> tweet_description)->media($media);
             
                 $twitter->tweets()->tweet($tweet);
             }
