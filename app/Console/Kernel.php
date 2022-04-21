@@ -4,6 +4,8 @@ namespace App\Console;
 
 use App\Tweet;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Coderjerk\BirdElephant\BirdElephant;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,7 +17,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\SendTweet::class
     ];
 
     /**
@@ -26,16 +28,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->call(function () {
-        //  $tweets = Tweet::all();
-
-        // foreach($tweets as $tweet){
-        //     if($tweet['tweet_date'] == Carbon::now('Europe/Stockholm')){
-
-        //     }
-        // }
-
-        // })->everyMinute();
+        $schedule->command('send:tweet')->everyMinute();
     }
 
     /**

@@ -2007,6 +2007,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var today = new Date();
 var currentMonth = today.getMonth() + 1;
@@ -2047,6 +2070,7 @@ var dateTime = date + 'T' + time;
   data: function data() {
     return {
       text: '',
+      tweet_img: '',
       date: dateTime,
       hour: '',
       newTweets: [],
@@ -2097,13 +2121,19 @@ var dateTime = date + 'T' + time;
     var dateTime = date + 'T' + time;
     return dateTime;
   },
+  // save form image
+  saveImg: function saveImg(img) {
+    this.tweet_img = img.target.files[0];
+    console.log("tweet_img:", this.tweet_img);
+  },
   // submit create tweet - form
   submitTweet: function submitTweet(e) {
     var _this = this;
 
     var form = new FormData(e.target);
     form.append("tweet_description", this.text);
-    form.append("tweet_date", this.date); // post form 
+    form.append("tweet_date", this.date);
+    form.append("tweet_img", this.tweet_img); // post form 
 
     axios.post('/createVue', form).then(function (response) {
       _this.newTweets = _this.tweets;
@@ -2117,7 +2147,10 @@ var dateTime = date + 'T' + time;
       if (error.response.status == 422) {
         _this.validationErrors = error.response.data.errors;
       }
-    }); // send to twitter
+    }); //refresh
+
+    this.text = ''; // window.location.href = '/profile';
+    // send to twitter
     // if(this.date.getTime() == now().getTime()){
     // }
   }
@@ -2155,9 +2188,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     user: String
@@ -2166,10 +2196,6 @@ __webpack_require__.r(__webpack_exports__);
     // redirect to user profile
     userProfile: function userProfile() {
       window.location.href = '/profile';
-    },
-    // redirect to homepage
-    goHome: function goHome() {
-      window.location.href = '/';
     }
   }
 });
@@ -60190,44 +60216,81 @@ var render = function () {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "container row justify-content-between" }, [
-            _vm._m(0),
-            _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
-              _c("label", [_vm._v("Publication Date:" + _vm._s(_vm.date))]),
+              _c("label", [_vm._v("Add Images:")]),
               _vm._v(" "),
               _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.date,
-                    expression: "date",
-                  },
-                ],
                 staticClass: "form-control",
-                attrs: {
-                  type: "datetime-local",
-                  name: "tweet_date",
-                  multiple: "",
-                  min: _vm.now(),
-                },
-                domProps: { value: _vm.date },
-                on: {
-                  click: function ($event) {
-                    return _vm.now()
-                  },
-                  input: function ($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.date = $event.target.value
-                  },
-                },
+                attrs: { type: "file", name: "tweet_img" },
+                on: { change: _vm.saveImg },
               }),
             ]),
+            _vm._v(" "),
+            _vm._m(0),
           ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "exampleModal",
+                tabindex: "-1",
+                role: "dialog",
+                "aria-labelledby": "scheduling",
+                "aria-hidden": "true",
+              },
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("label", [_vm._v("Publication Date:")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.date,
+                            expression: "date",
+                          },
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "datetime-local",
+                          name: "tweet_date",
+                          multiple: "",
+                          min: _vm.date,
+                        },
+                        domProps: { value: _vm.date },
+                        on: {
+                          click: function ($event) {
+                            return _vm.now()
+                          },
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.date = $event.target.value
+                          },
+                        },
+                      }),
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(2),
+                  ]),
+                ]
+              ),
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(3),
         ]
       ),
     ],
@@ -60239,13 +60302,65 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", [_vm._v("Add Multiple Images:")]),
+    return _c("div", { staticClass: "form-group align-self-end" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#exampleModal",
+          },
+        },
+        [
+          _vm._v(
+            "\n                    Programma pubblicazione\n                "
+          ),
+        ]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title", attrs: { id: "scheduling" } }, [
+        _vm._v("Programma pubblicazione"),
+      ]),
       _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "file", name: "tweet_img", multiple: "" },
-      }),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close",
+          },
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      ),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-bs-target": "#scheduling",
+            "data-dismiss": "modal",
+          },
+        },
+        [_vm._v("OK")]
+      ),
     ])
   },
   function () {
@@ -60291,10 +60406,6 @@ var render = function () {
       _vm._v(" "),
       _c("nav", { staticClass: "nav-nav" }, [
         _c("ul", { staticClass: "ul-links" }, [
-          _c("li", [
-            _c("span", { on: { click: _vm.goHome } }, [_vm._v("Home")]),
-          ]),
-          _vm._v(" "),
           _c("li", [
             _c("span", { on: { click: _vm.userProfile } }, [_vm._v("Profilo")]),
           ]),
@@ -60381,7 +60492,9 @@ var render = function () {
               }),
               _vm._v(" "),
               _c("div", { staticClass: "post__image" }, [
-                _c("img", { attrs: { src: tweet.tweet_img, alt: "" } }),
+                _c("img", {
+                  attrs: { src: "/storage/tweet/" + tweet.tweet_img, alt: "" },
+                }),
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "post__footer" }, [
@@ -60413,7 +60526,7 @@ var render = function () {
                   attrs: {
                     type: "button",
                     "data-toggle": "modal",
-                    "data-target": "#exampleModal",
+                    "data-target": ".bd-example-modal-sm",
                   },
                 },
                 [_c("i", { staticClass: "fas fa-trash-alt" })]
@@ -60423,12 +60536,11 @@ var render = function () {
           _c(
             "div",
             {
-              staticClass: "modal fade",
+              staticClass: "modal fade bd-example-modal-sm",
               attrs: {
-                id: "exampleModal",
                 tabindex: "-1",
                 role: "dialog",
-                "aria-labelledby": "exampleModalLabel",
+                "aria-labelledby": "mySmallModalLabel",
                 "aria-hidden": "true",
               },
             },
@@ -60451,7 +60563,11 @@ var render = function () {
                         "button",
                         {
                           staticClass: "btn btn-secondary",
-                          attrs: { type: "button", "data-dismiss": "modal" },
+                          attrs: {
+                            type: "button",
+                            "data-dismiss": "modal",
+                            "data-bs-target": "#example",
+                          },
                         },
                         [_vm._v("NO")]
                       ),
@@ -60460,7 +60576,11 @@ var render = function () {
                         "button",
                         {
                           staticClass: "btn btn-primary",
-                          attrs: { type: "button", "data-dismiss": "modal" },
+                          attrs: {
+                            type: "button",
+                            "data-dismiss": "modal",
+                            "data-bs-target": "#example",
+                          },
                           on: {
                             click: function ($event) {
                               return _vm.deleteTweet(tweet.id)
@@ -60522,11 +60642,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("ELIMINA")]
-      ),
+      _c("h5", { staticClass: "modal-title", attrs: { id: "example" } }, [
+        _vm._v("ELIMINA"),
+      ]),
       _vm._v(" "),
       _c(
         "button",

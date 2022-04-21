@@ -1,7 +1,9 @@
 <?php
 
+use Atymic\Twitter\Facade\Twitter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Coderjerk\BirdElephant\BirdElephant;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,5 @@ Route::post('/createVue', 'TwitterController@createVue');
 // delete tweet
 Route::post('/delete/{id}', 'TwitterController@delete');
 
+//post tweet
+Route::get('/postTweet', 'TwitterController@postTweet');

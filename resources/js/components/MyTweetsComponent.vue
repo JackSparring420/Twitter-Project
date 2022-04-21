@@ -21,7 +21,7 @@
                 </div>
                 <div class="post__text" v-html="autoLinked(tweet.tweet_description)"></div>
                 <div class="post__image">
-                    <img :src="tweet.tweet_img" alt="">
+                    <img :src="'/storage/tweet/' + tweet.tweet_img" alt="">
                 </div>
                 <div class="post__footer">
                     <div class="likes js-likes">
@@ -37,16 +37,16 @@
                     </div> 
                 </div>            
             </div>
-            <button type="button" class="btn btn-primary delete_tweet" data-toggle="modal" data-target="#exampleModal" v-if="new Date(tweet.tweet_date).getTime() > date">
+            <button type="button" class="btn btn-primary delete_tweet" data-toggle="modal" data-target=".bd-example-modal-sm" v-if="new Date(tweet.tweet_date).getTime() > date">
                 <i class="fas fa-trash-alt"></i>
             </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">ELIMINA</h5>
+                        <h5 class="modal-title" id="example">ELIMINA</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -55,8 +55,8 @@
                         Vuoi eliminare il post?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteTweet(tweet.id)">SI</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" data-bs-target="#example">NO</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="deleteTweet(tweet.id)" data-bs-target="#example">SI</button>
                     </div>
                     </div>
                 </div>
@@ -92,6 +92,7 @@ mounted(){
             console.log(r.data);
             });
     this.date = new Date().getTime();
+
 
 },
 methods:{

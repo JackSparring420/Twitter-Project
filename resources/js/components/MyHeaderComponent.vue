@@ -5,9 +5,6 @@
             <input type="checkbox" id="nav-toggle" class="nav-toggle">
             <nav class="nav-nav">
                 <ul class="ul-links">
-                    <li>
-                        <span @click="goHome">Home</span>
-                    </li>
 
                     <li>
                         <span @click="userProfile">Profilo</span>
@@ -32,10 +29,6 @@ export default {
         userProfile(){
             window.location.href = '/profile';
         },
-        // redirect to homepage
-        goHome() {
-            window.location.href = '/';
-        }
     }
 }
 </script>

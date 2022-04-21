@@ -11,6 +11,7 @@ class Tweet extends Model
         "tweet_description",
         "tweet_img",
         "tweet_date",
-        "tweet_likes"
+        "tweet_likes",
+        "tweet_update"
     ];
 }
