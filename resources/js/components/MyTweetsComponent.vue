@@ -23,7 +23,7 @@
                 <div class="post__image" v-if="tweet.tweet_img != null">
                     <img :src="'/storage/tweet/' + tweet.tweet_img" alt="">
                 </div>
-                <div class="post__footer">
+                <!-- <div class="post__footer">
                     <div class="likes js-likes">
                         <div class="likes__cta">
                             <span class="like-button  js-like-button" data-postid="${i}">
@@ -35,7 +35,7 @@
                             Piace a <b id="like-counter-1" class="js-likes-counter">{{tweet.tweet_likes}}</b> persone
                         </div>
                     </div> 
-                </div>            
+                </div>             -->
             </div>
             <button type="button" class="btn btn-primary delete_tweet" data-toggle="modal" data-target=".bd-example-modal-sm" v-if="new Date(tweet.tweet_date).getTime() > date">
                 <i class="fas fa-trash-alt"></i>

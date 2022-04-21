@@ -60461,25 +60461,6 @@ var render = function () {
                     }),
                   ])
                 : _vm._e(),
-              _vm._v(" "),
-              _c("div", { staticClass: "post__footer" }, [
-                _c("div", { staticClass: "likes js-likes" }, [
-                  _vm._m(1, true),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "likes__counter" }, [
-                    _vm._v("\n                        Piace a "),
-                    _c(
-                      "b",
-                      {
-                        staticClass: "js-likes-counter",
-                        attrs: { id: "like-counter-1" },
-                      },
-                      [_vm._v(_vm._s(tweet.tweet_likes))]
-                    ),
-                    _vm._v(" persone\n                    "),
-                  ]),
-                ]),
-              ]),
             ]
           ),
           _vm._v(" "),
@@ -60515,7 +60496,7 @@ var render = function () {
                 { staticClass: "modal-dialog", attrs: { role: "document" } },
                 [
                   _c("div", { staticClass: "modal-content" }, [
-                    _vm._m(2, true),
+                    _vm._m(1, true),
                     _vm._v(" "),
                     _c("div", { staticClass: "modal-body" }, [
                       _vm._v(
@@ -60576,30 +60557,6 @@ var staticRenderFns = [
         staticClass: "profile-pic",
         attrs: { src: "https://unsplash.it/300/300?image=15" },
       }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "likes__cta" }, [
-      _c(
-        "span",
-        {
-          staticClass: "like-button  js-like-button",
-          attrs: { "data-postid": "${i}" },
-        },
-        [
-          _c("i", {
-            staticClass: "like-button__icon fas fa-thumbs-up",
-            attrs: { "aria-hidden": "true" },
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "like-button__label" }, [
-            _vm._v("Mi Piace"),
-          ]),
-        ]
-      ),
     ])
   },
   function () {
